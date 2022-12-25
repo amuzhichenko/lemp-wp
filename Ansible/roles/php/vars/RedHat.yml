@@ -1,0 +1,13 @@
+---
+# vars file for nginx1
+php_packages:
+   - php
+   - php-mysqlnd
+   - php-curl
+   - php-gd
+   - php-intl
+   - php-mbstring
+   - php-soap
+   - php-xml
+   - php-xmlrpc
+centos_repo: "epel"                                   # repository

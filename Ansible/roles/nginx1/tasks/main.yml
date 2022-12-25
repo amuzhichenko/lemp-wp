@@ -1,0 +1,16 @@
+---
+# tasks file for nginx1
+### Include vars for all OS
+- include_tasks: variable.yml
+### Setup/install ###
+# RedHat
+- include_tasks: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+# Debian
+- include_tasks: setup-Ubuntu.yml
+  when: ansible_os_family == 'Debian'      
+### Generate TSL cert ###
+- include_tasks: configure-TSL.yml
+- include_tasks: configure-NGINX.yml
+### Put the testing web pages ###
+- include_tasks: test-site.yml

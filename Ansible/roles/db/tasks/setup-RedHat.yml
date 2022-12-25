@@ -1,0 +1,8 @@
+---
+- name: Install MySQL and dependencies
+  yum:
+    name: "{{ item }}"
+    state: present
+    enablerepo: "{{ centos_repo }}"
+    update_cache: yes
+  loop: "{{ mysql_packages }}"

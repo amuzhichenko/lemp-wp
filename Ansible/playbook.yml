@@ -1,0 +1,10 @@
+---
+- name: LEMP stack with wordpress
+  hosts: all
+  become: true
+
+  roles:
+    - php
+    - nginx1
+    - db
+    - wordpress

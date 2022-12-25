@@ -1,0 +1,15 @@
+---
+- name: Put the test web-page to test nginx
+  template:
+    src: index.html.j2
+    dest: "/var/www/{{ data_dir }}/index.html"
+    group: root
+    owner: root
+    mode: 0644
+- name: Put the test php-page to test nginx-php
+  template:
+    src: info.php.j2
+    dest: "/var/www/{{ data_dir }}/info.php"
+    group: root
+    owner: root
+    mode: 0644

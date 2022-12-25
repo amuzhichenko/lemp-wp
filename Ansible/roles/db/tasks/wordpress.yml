@@ -1,0 +1,17 @@
+---
+# Create database for Wordpress
+- name: Creates database for WordPress
+  mysql_db:
+    name: "{{ wordpress_db }}"
+    state: present
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+# Create user for Wordpress and give him priv to wordpress db
+- name: Create MySQL user for WordPress
+  mysql_user:
+    name: "{{ wordpress_user }}"
+    password: "{{ wordpress_pass }}"
+    priv: "{{ wordpress_db }}.*:ALL"
+    state: present
+    login_user: root
+    login_password: "{{ mysql_root_password }}"

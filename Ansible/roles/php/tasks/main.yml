@@ -1,0 +1,11 @@
+---
+# tasks file for nginx1
+### Include vars for all OS
+- include_tasks: variable.yml
+### Setup/install ###
+# RedHat
+- include_tasks: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+# Debian
+- include_tasks: setup-Ubuntu.yml
+  when: ansible_os_family == 'Debian'      

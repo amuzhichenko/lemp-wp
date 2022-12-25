@@ -1,0 +1,58 @@
+---
+### Protect my.cnf global MySQL config ###
+- name: Protect my.cnf
+  file:
+    path: '{{ mysql_config_file }}'
+    mode: '0640'
+    owner: '{{ mysql_cnf_owner }}'
+    group: '{{ mysql_cnf_group }}'
+    follow: true
+    state: file
+### Check the perm on mysql-datadir
+- name: Check permissions on mysql-datadir
+  file:
+    path: '{{ mysql_datadir }}'
+    state: directory
+    owner: '{{ mysql_hardening_user }}'
+    group: '{{ mysql_hardening_user }}'
+    mode: '0750'
+### Check the perm on log-files
+- name: Check permissions on mysql-logfile
+  file:
+    path: '{{ mysql_hardening_log_file }}'
+    state: file
+    owner: '{{ mysql_hardening_user }}'
+    group: '{{ mysql_hardening_group }}'
+    mode: '0640'
+### Check mysql config-dir exists and has right perm
+- name: Check mysql configuration-directory exists and has right permissions
+  file:
+    path: '{{ mysql_hardening_mysql_confd_dir }}'
+    state: directory
+    owner: '{{ mysql_hardening_user }}'
+    group: '{{ mysql_hardening_group }}'
+    mode: '0750'
+### Check the include-dir is present in my.cnf
+- name: Check include-dir directive is present in my.cnf   
+  lineinfile:
+    path: '{{ mysql_config_file }}'
+    line: '!includedir {{ mysql_hardening_mysql_confd_dir }}'
+    insertafter: 'EOF'
+    state: present
+    backup: true
+  notify: restart mysql
+### Apply the my.cnf to MySQL
+- name: Apply the my.cnf from template
+  template:
+    src: 'hardening.cnf.j2'
+    dest: '{{ mysql_hardening_mysql_hardening_conf_file }}'
+    owner: '{{ mysql_cnf_owner }}'
+    group: '{{ mysql_cnf_group }}'
+    mode: '0640'
+  notify: restart mysql
+### Enable MySQL
+- name: Enable mysql
+  service:
+    name: '{{ mysql_daemon }}'
+    state: started
+    enabled: yes

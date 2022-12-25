@@ -1,0 +1,22 @@
+---
+# mysql backup
+# Create folder for backup's
+- name: Create a folder for DB backup's
+  file:
+    path: "{{ backup_folder }}"
+    state: directory
+    mode: 0755
+# Copy backup script to destination
+- name: Copy script to backup DB
+  template:
+    src: backup.sh.j2
+    dest: "{{ backup_folder }}/backup.sh"
+    mode: 0755
+# Do cronjob every 10 min to backup DB
+- name: Create cronjob to backup's
+  ansible.builtin.cron:
+    name: "backup DB"
+    minute: "{{ time_min }}"
+    hour: "{{ time_hour }}"
+    job: "{{ backup_folder }}/backup.sh"
+    user: root

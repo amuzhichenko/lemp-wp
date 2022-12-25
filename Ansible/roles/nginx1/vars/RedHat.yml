@@ -1,0 +1,12 @@
+---
+# vars file for nginx1
+nginx_packages:
+   - nginx=1.18.0
+   - openssl
+   - python3-pyOpenSSL
+centos_repo: "epel"                       # repository
+php_sock: /var/run/php-fpm/www.sock       # path to php sock
+php_conf: fastcgi_params                  # path to php conf or params
+php_user: ""                              # user to enable with php-fpm
+server_name: 3.45.76.45                   # server name
+server_name_w: www.3.45.76.45             # server name with www

@@ -1,0 +1,18 @@
+#!/bin/bash
+dir=$(date +%d-%m-%y)                 # dir for backups
+db_name=$(date +%H-%M)                # db name after backup
+dest={{ backup_folder }}/$dir         # full path to backups
+user=root                             # User for DB
+PGPASSWORD={{ mysql_root_password }}  # Pass for DB
+db={{ wordpress_db }}                 # DB which we backup
+export PGPASSWORD		      # Replace default pass in psql variable environment
+# Check existing dir for db backup
+if find "$dest" > /dev/null; then
+   echo "" > /dev/null
+else  
+   mkdir $dest
+fi
+# Make backup
+mysqldump -h localhost --force --opt --user=$user "$db" > "$dest"/"$db_name".sql
+# Reset pass to default in psql variable environment
+unset PGPASSWORD

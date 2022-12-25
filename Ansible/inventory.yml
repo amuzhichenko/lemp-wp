@@ -1,0 +1,9 @@
+---
+all:
+  children:
+     ubuntu:
+       hosts:
+         3.64.147.199:
+     centos:
+       hosts:
+         3.45.76.45:

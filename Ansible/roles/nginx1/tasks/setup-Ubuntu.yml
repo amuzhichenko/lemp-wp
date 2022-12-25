@@ -1,0 +1,13 @@
+---
+# Install Nginx and OpenSSL
+- name: Install Nginx and OpenSSL tool
+  apt:
+    name: '{{ item }}'
+    state: present
+    update_cache: yes
+  loop: '{{ nginx_packages }}'
+- name: Running Nginx
+  service:
+    name: nginx
+    state: started
+    enabled: yes

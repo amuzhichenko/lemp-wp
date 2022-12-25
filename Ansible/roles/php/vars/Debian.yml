@@ -1,0 +1,12 @@
+---
+# vars file for PHP on Ubuntu
+php_packages:
+   - php-fpm 
+   - php-mysql
+   - php-curl
+   - php-gd
+   - php-intl
+   - php-mbstring
+   - php-soap
+   - php-xml
+   - php-xmlrpc

@@ -1,0 +1,17 @@
+---
+# tasks file for wordpress
+# Setup and config wordpress
+- name: Download and unpack latest WordPress
+  unarchive:
+     src: https://wordpress.org/latest.tar.gz
+     dest: "/var/www/{{ data_dir }}"
+     remote_src: yes
+     creates: "/var/www/{{ data_dir }}/wordpress"
+- name: Configure wp-config.php
+  template:
+     src: "wp-config.php.j2"
+     dest: "/var/www/{{ data_dir }}/wordpress/wp-config.php"
+     group: root
+     owner: root
+     mode: 0644
+  notify: Restart nginx 

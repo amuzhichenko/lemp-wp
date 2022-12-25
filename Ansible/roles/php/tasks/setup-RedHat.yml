@@ -1,0 +1,14 @@
+---
+# Install PHP and dependencies for RedHat
+- name: Install PHP and dependencies for RedHat
+  yum:
+    name: "{{ item }}"
+    state: present
+   # enablerepo: "{{ centos_repo }}"
+    update_cache: yes
+  loop: "{{ php_packages }}"
+- name: Running PHP on RedHat
+  service:
+     name: php-fpm
+     state: started
+     enabled: yes

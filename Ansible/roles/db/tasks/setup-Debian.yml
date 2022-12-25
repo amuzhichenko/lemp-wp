@@ -1,0 +1,7 @@
+---
+- name: Install MySQL and dependencies
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop: "{{ mysql_packages }}"

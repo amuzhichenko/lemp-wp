@@ -1,0 +1,13 @@
+---
+# Install PHP and dependencies
+- name: Install PHP and dependencies for Ubuntu
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop: "{{ php_packages }}"
+- name: Running PHP on Ubuntu
+  service:
+     name: php7.4-fpm
+     state: started
+     enabled: yes

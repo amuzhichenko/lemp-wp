@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include acme.db"
+      include_role:
+        name: "acme.db"

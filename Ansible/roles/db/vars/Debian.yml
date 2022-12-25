@@ -1,0 +1,11 @@
+---
+mysql_packages:
+   - mysql-server-8.0
+   - python3-mysqldb
+mysql_config_file: '/etc/mysql/my.cnf'                # path to my.cnf
+mysql_hardening_mysql_confd_dir: '/etc/mysql/conf.d'  # mysql confd dir
+mysql_hardening_log_file: '/var/log/mysql/error.log'  # log file
+mysql_hardening_group: 'mysql'                        # mysql group
+mysql_daemon: mysql                                   # daemon mysql
+mysql_socket: /run/mysqld/mysqld.sock                 # path to socket
+mysql_pid_file: /run/mysqld/mysqld.pid                # path to pid

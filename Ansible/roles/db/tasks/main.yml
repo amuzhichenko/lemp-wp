@@ -1,0 +1,19 @@
+---
+# tasks file for db
+### Include vars for all OS
+- include_tasks: variable.yml
+### Setup/install ### 
+# RedHat
+- include_tasks: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+# Debian
+- include_tasks: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+### Configure MySQL ###
+- include_tasks: configure.yml
+- include_tasks: mysql_secure_installation.yml
+### Mysql for Wordpress
+- include_tasks: wordpress.yml
+### Backup wordpress DB
+- include_tasks: starting-backup.yml

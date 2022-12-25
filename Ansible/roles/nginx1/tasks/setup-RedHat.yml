@@ -1,0 +1,14 @@
+---
+# Install Nginx and OpenSSL for RedHat
+- name: Install Nginx and OpenSSL tool
+  yum:
+    name: '{{ item }}'
+    state: present
+    enablerepo: '{{ centos_repo }}'
+    update_cache: yes
+  loop: '{{ nginx_packages }}'
+- name: Running Nginx
+  service:
+    name: nginx
+    state: started
+    enabled: yes

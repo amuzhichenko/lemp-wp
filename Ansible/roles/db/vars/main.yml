@@ -1,0 +1,59 @@
+---
+# vars file for db
+##### Common vars for role ######
+### General config
+mysql_root_password: "striker5674" # Password for root
+mysql_cnf_owner: 'root'            # owner of /etc/mysql/*.cnf files
+mysql_cnf_group: 'mysql'           # group of /etc/mysql/*.cnf files
+mysql_user_home: /root             # Path to .cnf file with credential's for root
+mysql_datadir: '/var/lib/mysql'    # mysql data directory
+mysql_hardening_user: 'mysql'      # owner of data
+mysql_hardening_mysql_hardening_conf_file: '{{ mysql_hardening_mysql_confd_dir }}/hardening.cnf'
+### Params for my.cnf.j2 
+# MySQL connection setting's
+mysql_port: "3306"
+mysql_bind_address: '0.0.0.0'
+# Settings for security
+mysql_hardening_skip_show_database: true
+mysql_hardening_skip_grant_tables: false
+mysql_hardening_options:
+  safe-user-create: true
+  skip-symbolic-links: true
+  local-infile: false
+  allow-suspicious-udfs: false
+  automatic-sp-privileges: false
+  secure-file-priv: '/tmp'
+  user: '{{ mysql_hardening_user }}'
+# Memory settings (default values optimized ~512MB RAM).
+mysql_key_buffer_size: "256M"
+mysql_max_allowed_packet: "64M"
+mysql_table_open_cache: "256"
+mysql_sort_buffer_size: "1M"
+mysql_read_buffer_size: "1M"
+mysql_read_rnd_buffer_size: "4M"
+mysql_myisam_sort_buffer_size: "64M"
+mysql_thread_cache_size: "8"
+mysql_query_cache_type: "0"
+mysql_query_cache_size: "16M"
+mysql_query_cache_limit: "1M"
+mysql_max_connections: "151"
+mysql_tmp_table_size: "16M"
+mysql_max_heap_table_size: "16M"
+mysql_group_concat_max_len: "1024"
+mysql_join_buffer_size: "262144"
+# Other settings.
+mysql_lower_case_table_names: "0"
+mysql_wait_timeout: "28800"
+mysql_event_scheduler_state: "OFF"
+# MySQLdump settings.
+mysql_mysqldump_max_allowed_packet: "64M"
+
+# MySQL for Wordpress
+wordpress_user: wordpress
+wordpress_db: wordpress
+wordpress_pass: 7777777
+time_min: "*/10"
+time_hour: "*"
+
+# MySQL backup
+backup_folder: /home/db_backups

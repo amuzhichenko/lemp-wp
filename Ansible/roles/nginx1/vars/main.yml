@@ -1,0 +1,49 @@
+---
+# vars file for nginx1
+### Vars for TSL ###
+dir_tsl: /etc/ssl/server             # path to tsl files cert,key,request
+tsl_key: /etc/ssl/server/server.pem  # path to tsl key
+tsl_csr: /etc/ssl/server/server.csr  # path to tsl request
+tsl_cert: /etc/ssl/server/server.crt # path to tsl certificate 
+tsl_dh: /etc/ssl/server/dhparams.pem # path to tsl dh params
+tsl_prov: selfsigned                 # tsl provider
+tsl_dh_bits: 2048                    # DH bits
+country: BY                          # data for csr request
+organization: example                # data for csr request
+org_name: example.com                # data for csr request
+
+### Vars for NGINX ###
+nginx_dir:                           # Create directory for our sites
+  - /etc/nginx/sites-available
+  - /etc/nginx/sites-enabled 
+
+nginx_default:                       # Remove default directory and conf
+  - /var/www/html
+  - /etc/nginx/sites-enabled/default
+  - /etc/nginx/sites-available/default
+  - /etc/nginx/nginx.conf.default
+
+### Vars for NGINX config
+nginx_conf: /etc/nginx/nginx.conf       # path to nginx.conf
+nginx_worker_processes: auto            # worker process nginx
+nginx_events_worker_connections: 1024   # number of work connections in time
+nginx_http_server_tokens: 'off'         # prohibit to show version of nginx if failure
+data_dir: example_com                   # data directory for site(you can create list of directorys)
+nginx_http_add_headers:                 # fonts
+  - 'X-Frame-Options SAMEORIGIN'
+  - 'X-Content-Type-Options nosniff'
+  - 'X-XSS-Protection "1; mode=block"'
+nginx_http_access_log_format: |         # log format
+  '$remote_addr $remote_user $request_time $upstream_response_time $msec [$time_local] '
+  '"$request" $status $body_bytes_sent '
+  '"$http_referer" "$http_user_agent"'
+nginx_http_server_names_hash_bucket_size: 256 # set size for hash-table of server name's  
+nginx_http_server_names_hash_max_size: 512    # max size for hash-table of server name's
+nginx_http_sendfile: 'on'                     # option to send static file for speed up
+nginx_http_tcp_nopush: 'on'                   # option tcp no push
+nginx_http_keepalive_timeout: 60              # time to wait connection with client
+nginx_http_client_max_body_size: '1m'         # max size of client's request
+nginx_http_types_hash_max_size: 2048          # mas size of hash-table of types
+nginx_http_gzip: 'on'                         # enable gzip data for request to client
+nginx_http_gzip_types: 'text/plain text/css application/javascript application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript image/svg+xml image/svg'
+nginx_http_gzip_disable: 'msie6'              # prohibit to gzip data for request with request with regular expression

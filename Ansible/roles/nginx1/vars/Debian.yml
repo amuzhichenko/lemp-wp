@@ -1,0 +1,11 @@
+---
+# vars file for nginx on Ubuntu
+nginx_packages:
+   - nginx
+   - openssl
+   - python-openssl
+php_conf: snippets/fastcgi-php.conf          # path to php conf or params
+php_sock: /var/run/php/php7.4-fpm.sock       # path to php sock
+php_user: "user www-data;"                   # user for enable with php-fpm
+server_name: 3.64.147.199                    # server name
+server_name_w: www.3.64.147.199              # server name with www

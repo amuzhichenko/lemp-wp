@@ -1,0 +1,31 @@
+---
+# mysql_secure_installation
+# Update the root password if mysql can login as a root without password
+- name: Update root password
+  mysql_user:
+    name: root
+    host_all: true
+    password: "{{ mysql_root_password | mandatory }}"
+    state: present
+# Copy user.my.cnf with root credentials from templates
+- name: Copy root-my.cnf with credentials
+  template:
+    src: root-my.cnf.j2
+    dest: '{{ mysql_user_home }}/.my.cnf'
+    mode: 0400
+# Remove the test mysql DB
+- name: Remove mysql test db
+  mysql_db:
+    name: test
+    state: absent
+# Remove anonymous users from all host's
+- name: Remove anonymous users
+  mysql_user:
+    name: ''
+    state: absent
+    host_all: true
+# Remove remote acces as a root from all host's
+- name: Remove remote root
+  community.mysql.mysql_query:
+    query:
+      - DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1')

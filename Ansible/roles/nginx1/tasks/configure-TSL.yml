@@ -1,0 +1,40 @@
+---
+# Create TSL certs
+- name: Create dir for certs and key
+  file: 
+    path: '{{ dir_tsl }}' 
+    state: directory
+    mode: 0755
+- name: Generate TSL key
+  openssl_privatekey:
+    path: '{{ tsl_key }}'
+    state: present
+    owner: 'root'
+    group: 'root'
+    mode: 0600
+- name: Generate TSL request
+  openssl_csr:
+    path: '{{ tsl_csr }}'
+    privatekey_path: '{{ tsl_key }}'
+    state: present
+    country_name: '{{ country }}'
+    organization_name: '{{ organization }}'
+    common_name: '{{ org_name }}'
+- name: Generate a self signed certificate
+  openssl_certificate:
+    path: '{{ tsl_cert }}'
+    privatekey_path: '{{ tsl_key }}'
+    csr_path: '{{ tsl_csr }}'
+    provider: '{{ tsl_prov }}'
+    owner: 'root'
+    group: 'root'
+    mode: 0644
+    state: present
+- name: Generate DH params
+  openssl_dhparam:
+    path: '{{ tsl_dh }}'
+    owner: 'root'
+    group: 'root'
+    mode: 0644
+    size: '{{ tsl_dh_bits }}'
+    state: present

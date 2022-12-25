@@ -1,0 +1,15 @@
+---
+# vars for wordpress
+data_dir: example_com                           # data dir with our site to unzip tar.gz, must be exist
+db_name: wordpress                              # copy from db/vars/main.yml
+db_user: wordpress                              # copy from db/vars/main.yml
+db_pass: 7777777                                # copy from db/vars/main.yml
+## different keys for wp-config
+AUTH_KEY: ldf,lklgkflgkkortkrogkrogogmvfmv      # auth_key for wp-config
+SEC_AUTH_KEY: dfdfd7v8cvfc8vf9f9fvf9vf8vf9vf8v  # sec_auth_key for wp-config
+LOG_IN_KEY: fvfvfvfvLODFDLFM<DLMDL<L86878*&*    # log_key for wp-config
+NONCE_KEY: 8d8fudfidjfidjfij*&*&*ujdl,c.;.c     # key for wp-config
+AUTH_SALT: sdfsffdfdppppbpp;wyqewuiifdfjmckc    # key for wp-config
+SEC_AUTH_SALT: pppc;;vmmvnbdhyudjchhdjjskkfklc  # key for wp-config
+LOG_IN_SALT: 1651695959555962265659596cddfcdf   # key for wp-config
+NONCE_SALT: dfdfd58d5cd8sd6x965cxsws6sx9d9d6    # key for wp-config
