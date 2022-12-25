@@ -1,4 +1,4 @@
-# task_06-ansible-lemp-wordpress
+# ansible-lemp-wordpress
 
 ## Description of the task
 Organise deploy LEMP stack + Wordpress to Ubuntu and CentOS machine. Front - nginx, back - Wordpress + PHP, DB for collection data from WP
